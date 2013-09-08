@@ -1,0 +1,12 @@
+1. Syntax highlighting  + (bolje obojati možda)
+2. Outlining
+3. Intellisense
+	3.1. QuickInfo + (dodan Quick info samo za "Module", dodati za ostale keyworde)
+	3.2. SmartTags
+	3.3. Statment completion +
+	3.4. Parameter help
+4. Brace matching
+5. Smart Indent / Formatting
+6. Errors
+7. Navigation bar
+8. File extensions +
