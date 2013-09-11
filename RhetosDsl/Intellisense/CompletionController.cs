@@ -12,6 +12,8 @@ using Microsoft.VisualStudio.Utilities;
 using Microsoft.VisualStudio;
 using System.Windows;
 using System.Runtime.InteropServices;
+using Omega.RhetosDsl.Helpers;
+using System.Linq;
 
 namespace Omega.RhetosDsl
 {
@@ -77,7 +79,7 @@ namespace Omega.RhetosDsl
                         handled = StartSession();
                         break;
                     case VSConstants.VSStd2KCmdID.RETURN:
-                        handled = Complete(false);
+                        handled = Complete(false); // mozda i tu zavrsavat?
                         break;
                     case VSConstants.VSStd2KCmdID.TAB:
                         handled = Complete(true);
@@ -99,10 +101,16 @@ namespace Omega.RhetosDsl
                     {
                         case VSConstants.VSStd2KCmdID.TYPECHAR:
                             char ch = GetTypeChar(pvaIn);
-                            if (ch == ' ')
-                                StartSession();
-                            else if (_currentSession != null)
+                            
+                            if (_currentSession != null)
+                            {
                                 Filter();
+                            }
+                            else
+                            {
+                                if (char.IsLetter(ch) && IsKeywordStart(ch.ToString()))
+                                    StartSession();
+                            }
                             break;
                         case VSConstants.VSStd2KCmdID.BACKSPACE:
                             Filter();
@@ -112,6 +120,11 @@ namespace Omega.RhetosDsl
             }
 
             return hresult;
+        }
+
+        private bool IsKeywordStart(string ch)
+        {
+            return EnumUtil.GetValues<RhetosTokenTypes>().Any(tt => tt.ToString().StartsWith(ch, StringComparison.InvariantCultureIgnoreCase));
         }
 
         private void Filter()
