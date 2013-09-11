@@ -1,43 +1,39 @@
-﻿// Copyright (c) Microsoft Corporation
-// All rights reserved
-
-using Omega.RhetosDsl.Helpers;
-
-namespace Omega.RhetosDsl
+﻿namespace Omega.RhetosDsl
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using Microsoft.VisualStudio.Text;
     using Microsoft.VisualStudio.Text.Classification;
-    using Microsoft.VisualStudio.Text.Editor;
     using Microsoft.VisualStudio.Text.Tagging;
     using Microsoft.VisualStudio.Utilities;
+    using Helpers;
+    using Microsoft.VisualStudio.Shell;
 
     [Export(typeof(ITaggerProvider))]
-    [ContentType("RhetosLanguage")]
+    [ContentType("RhetosDsl")]
     [TagType(typeof(ClassificationTag))]
     internal sealed class RhetosClassifierProvider : ITaggerProvider
     {
 
         [Export]
-        [Name("RhetosLanguage")]
+        [Name("RhetosDsl")]
         [BaseDefinition("code")]
         internal static ContentTypeDefinition RhetosContentType {get; set;}
 
         [Export]
         [FileExtension(".rhe")]
-        [ContentType("RhetosLanguage")]
+        [ContentType("RhetosDsl")]
         internal static FileExtensionToContentTypeDefinition RhetosFileType { get; set; }
 
         [Export]
         [FileExtension(".alpha")]
-        [ContentType("RhetosLanguage")]
+        [ContentType("RhetosDsl")]
         internal static FileExtensionToContentTypeDefinition AlphaFileType { get; set; }
 
 
         [Export(typeof(ClassificationTypeDefinition))]
-        [Name("RhetosLanguage")]
+        [Name("RhetosDsl")]
         internal static ClassificationTypeDefinition RhetosClassificationType { get; set; }
 
         [Import]

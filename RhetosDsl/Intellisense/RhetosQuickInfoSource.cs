@@ -16,7 +16,7 @@ namespace Omega.RhetosDsl
 {
     
     [Export(typeof(IQuickInfoSourceProvider))]
-    [ContentType("RhetosLanguage")]
+    [ContentType("RhetosDsl")]
     [Name("RhetosQuickInfo")]
     class RhetosQuickInfoSourceProvider : IQuickInfoSourceProvider
     {

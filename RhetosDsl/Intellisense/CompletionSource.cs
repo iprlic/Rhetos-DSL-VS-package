@@ -13,7 +13,7 @@ using Omega.RhetosDsl.Helpers;
 namespace Omega.RhetosDsl
 {
     [Export(typeof(ICompletionSourceProvider))]
-    [ContentType("RhetosLanguage")]
+    [ContentType("RhetosDsl")]
     [Name("RhetosCompletion")]
     class RhetosCompletionSourceProvider : ICompletionSourceProvider
     {

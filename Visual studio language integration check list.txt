@@ -9,4 +9,4 @@
 5. Smart Indent / Formatting
 6. Errors
 7. Navigation bar
-8. File extensions +
+8. File extensions 

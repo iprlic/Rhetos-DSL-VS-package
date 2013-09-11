@@ -1,24 +1,17 @@
-﻿// Copyright (c) Microsoft Corporation
-// All rights reserved
-
-using System.Diagnostics;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Omega.RhetosDsl.Helpers;
-
-namespace Omega.RhetosDsl
+﻿namespace Omega.RhetosDsl
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using Microsoft.VisualStudio.Text;
-    using Microsoft.VisualStudio.Text.Classification;
-    using Microsoft.VisualStudio.Text.Editor;
     using Microsoft.VisualStudio.Text.Tagging;
     using Microsoft.VisualStudio.Utilities;
+    using System.Diagnostics;
+    using System.Text.RegularExpressions;
+    using Omega.RhetosDsl.Helpers;
 
     [Export(typeof(ITaggerProvider))]
-    [ContentType("RhetosLanguage")]
+    [ContentType("RhetosDsl")]
     [TagType(typeof(RhetosTokenTag))]
     internal sealed class RhetosTokenTagProvider : ITaggerProvider
     {

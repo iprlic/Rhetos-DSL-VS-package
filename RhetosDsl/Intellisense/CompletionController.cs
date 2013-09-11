@@ -18,7 +18,7 @@ namespace Omega.RhetosDsl
     #region Command Filter
 
     [Export(typeof(IVsTextViewCreationListener))]
-    [ContentType("RhetosLanguage")]
+    [ContentType("RhetosDsl")]
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
     internal sealed class VsTextViewCreationListener : IVsTextViewCreationListener
     {
