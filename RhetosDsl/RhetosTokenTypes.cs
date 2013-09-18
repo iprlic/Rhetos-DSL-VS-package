@@ -121,6 +121,8 @@
         ValidationMenuItem,
         Browse,
         Browseable,
-        SmartSearch
+        SmartSearch,
+        RhetosComment,
+        RhetosError
     }
 }

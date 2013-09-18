@@ -79,7 +79,7 @@ namespace Omega.RhetosDsl
                         handled = StartSession();
                         break;
                     case VSConstants.VSStd2KCmdID.RETURN:
-                        handled = Complete(false); // mozda i tu zavrsavat?
+                        handled = Complete(false); 
                         break;
                     case VSConstants.VSStd2KCmdID.TAB:
                         handled = Complete(true);

@@ -67,8 +67,12 @@
             _buffer = buffer;
             _aggregator = rhetosTagAggregator;
             _rhetosTypes = new Dictionary<RhetosTokenTypes, IClassificationType>();
+
+      
+
             foreach (var rhetosTokenType in EnumUtil.GetValues<RhetosTokenTypes>())
             {
+                
                 _rhetosTypes[rhetosTokenType] = typeService.GetClassificationType(rhetosTokenType.ToString());
             }
         }

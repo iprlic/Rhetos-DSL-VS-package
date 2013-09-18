@@ -55,7 +55,7 @@ namespace Omega.RhetosDsl
             var line = triggerPoint.GetContainingLine();
             SnapshotPoint start = triggerPoint;
 
-            while (start > line.Start && !char.IsWhiteSpace((start - 1).GetChar()))
+            while (start > line.Start && char.IsLetter((start - 1).GetChar()))
             {
                 start -= 1;
             }

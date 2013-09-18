@@ -602,5 +602,13 @@ namespace Omega.RhetosDsl
         [Export(typeof(ClassificationTypeDefinition))]
         [Name("SmartSearch")]
         internal static ClassificationTypeDefinition rhetosSmartSearch = null;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name("RhetosComment")]
+        internal static ClassificationTypeDefinition rhetosComment = null;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name("RhetosError")]
+        internal static ClassificationTypeDefinition rhetosError = null;
     }
 }

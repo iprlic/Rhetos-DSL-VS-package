@@ -44,8 +44,10 @@
             _rhetosTypes = new Dictionary<string, RhetosTokenTypes>();
             foreach (var rhetosTokenType in EnumUtil.GetValues<RhetosTokenTypes>())
             {
-                _rhetosTypes[rhetosTokenType.ToString().ToLower()] = rhetosTokenType;
+
+               _rhetosTypes[rhetosTokenType.ToString().ToLower()] = rhetosTokenType;
             }
+
         }
 
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged
@@ -62,9 +64,14 @@
                 ITextSnapshotLine containingLine = curSpan.Start.GetContainingLine();
 
                 var regEx = @"(\b[^\s]+\b)";
+                var commentRegex = @"(//)+";
+                //TODO: implement error
+
                 int curLoc = containingLine.Start.Position;
 
                 var matchCollection = Regex.Matches(containingLine.GetText(), regEx, RegexOptions.IgnoreCase);
+
+                var commentMatchCollection = Regex.Matches(containingLine.GetText(), commentRegex, RegexOptions.IgnoreCase);
 
 
                 foreach (Match tokenMatch in matchCollection)
@@ -80,8 +87,21 @@
                         }
                     }
                 }
+
+                foreach (Match tokenMatch in commentMatchCollection)
+                {
+                    var matchLoc = curLoc + tokenMatch.Index;
+
+                    var tokenSpan = new SnapshotSpan(curSpan.Snapshot, new Span(matchLoc,curSpan.End));
+                        if (tokenSpan.IntersectsWith(curSpan))
+                        {
+                            Debug.WriteLine(String.Format("Match: {0}, CurLoc: {1}, Match index: {2}, MatchLoc: {3}", tokenMatch.Value, curLoc, tokenMatch.Index, matchLoc));
+                            yield return new TagSpan<RhetosTokenTag>(tokenSpan, new RhetosTokenTag(_rhetosTypes["RhetosComment".ToLower()]));
+                        }
+                    }
+                }
             }
             
-        }
+        
     }
 }

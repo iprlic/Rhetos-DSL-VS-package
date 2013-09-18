@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using System.Windows;
 using System.Windows.Media;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
@@ -32,6 +33,7 @@ namespace Omega.RhetosDsl
         {
             DisplayName = "LookupVisible";
             ForegroundColor = Colors.Green;
+
         }
     }
 
@@ -1801,5 +1803,55 @@ namespace Omega.RhetosDsl
             DisplayName = "SmartSearch";
             ForegroundColor = Colors.Green;
         }
+    }
+
+    [Export(typeof(EditorFormatDefinition))]
+    [ClassificationType(ClassificationTypeNames = "RhetosComment")]
+    [Name("RhetosComment")]
+    [UserVisible(false)]
+    [Order(Before = Priority.Default)]
+    internal sealed class RhetosComment : ClassificationFormatDefinition
+    {
+        public RhetosComment()
+        {
+            DisplayName = "RhetosComment";
+            ForegroundColor = Colors.DarkGray; 
+        }
+    }
+
+    [Export(typeof(EditorFormatDefinition))]
+    [ClassificationType(ClassificationTypeNames = "RhetosError")]
+    [Name("RhetosError")]
+    [UserVisible(false)]
+    [Order(Before = Priority.Default)]
+    internal sealed class RhetosError : ClassificationFormatDefinition
+    {
+        public RhetosError()
+        {
+            DisplayName = "RhetosError";
+            TextDecorations = GetErrorDecoration();
+        }
+
+        private TextDecorationCollection GetErrorDecoration()
+        {
+ 	        TextDecoration myUnderline = new TextDecoration();
+
+            Pen myPen = new Pen();
+            myPen.Brush = new LinearGradientBrush(Colors.Yellow, Colors.Red, new Point(0, 0.5), new Point(1, 0.5));
+            myPen.Brush.Opacity = 0.5;
+            myPen.Thickness = 1.5;
+            myPen.DashStyle = DashStyles.Dash;
+            myUnderline.Pen = myPen;
+            myUnderline.PenThicknessUnit = TextDecorationUnit.FontRecommended;
+
+
+            TextDecorationCollection myCollection = new TextDecorationCollection();
+            myCollection.Add(myUnderline);
+
+
+            return myCollection;
+        }
+
+
     }
 }
